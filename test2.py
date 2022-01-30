@@ -1,6 +1,7 @@
 import numpy as np
 #Linear Regression with TensorFlow
 import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
 from sklearn.datasets import fetch_california_housing
 housing = fetch_california_housing()
 m, n = housing.data.shape
