@@ -1,0 +1,22 @@
+import numpy as np
+import nltk
+from nltk.book import*
+from pyparsing import WordStart
+def my_bag_of_words(text,words_to_index, dict_size):
+    """
+    text: a string
+    dict_size: size of the dictionary
+
+    return a vector which is a bag-of-words representation of 'text'
+"""
+    words_token = nltk.word_tokenize(words_to_index)
+    fdist = FreqDist(words_token)
+    print(fdist)
+    fdist.tabulate(dict_size,cumulative = False)
+    fdist.plot(dict_size,cumulative=False)
+
+'''
+test
+'''
+my_bag_of_words("Hi this is Jichen Li, Date is 2022/2/5","Hi My name is Jichen Li, Happy to see you, Can I be your friend? My interest in EE-627 may help you.",4)
+    
