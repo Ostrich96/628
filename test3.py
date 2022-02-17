@@ -1,18 +1,19 @@
 # Plot ad hoc mnist instances
 from keras.datasets import mnist
 import matplotlib.pyplot as plt
+from keras.datasets import fashion_mnist
 import numpy as np
 # load (downloaded if needed) the MNIST dataset
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 # plot 4 images as gray scale
 plt.subplot(221)
-plt.imshow(X_train[0], cmap=plt.get_cmap('gray'))
+plt.imshow(x_train[0], cmap=plt.get_cmap('gray'))
 plt.subplot(222)
-plt.imshow(X_train[1], cmap=plt.get_cmap('gray'))
+plt.imshow(x_train[1], cmap=plt.get_cmap('gray'))
 plt.subplot(223)
-plt.imshow(X_train[2], cmap=plt.get_cmap('gray'))
+plt.imshow(x_train[2], cmap=plt.get_cmap('gray'))
 plt.subplot(224)
-plt.imshow(X_train[3], cmap=plt.get_cmap('gray'))
+plt.imshow(x_train[3], cmap=plt.get_cmap('gray'))
 # show the plot
 plt.show()
 
@@ -27,17 +28,17 @@ seed = 7
 np.random.seed(seed)
 
 # load data
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 
 
 # flatten 28*28 images to a 784 vector for each image
-num_pixels = X_train.shape[1] * X_train.shape[2]
-X_train = X_train.reshape(X_train.shape[0], num_pixels).astype('float32')
-X_test = X_test.reshape(X_test.shape[0], num_pixels).astype('float32')
+num_pixels = x_train.shape[1] * x_train.shape[2]
+x_train = x_train.reshape(x_train.shape[0], num_pixels).astype('float32')
+x_test = x_test.reshape(x_test.shape[0], num_pixels).astype('float32')
 
 # normalize inputs from 0-255 to 0-1
-X_train = X_train / 255
-X_test = X_test / 255
+x_train = x_train / 255
+x_test = x_test / 255
 
 # one hot encode outputs
 y_train = np_utils.to_categorical(y_train)
@@ -59,7 +60,7 @@ def baseline_model():
 # build the model
 model = baseline_model()
 # Fit the model
-model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=200, verbose=2)
+model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=10, batch_size=200, verbose=2)
 # Final evaluation of the model
-scores = model.evaluate(X_test, y_test, verbose=0)
+scores = model.evaluate(x_test, y_test, verbose=0)
 print("Baseline Error: %.2f%%" % (100-scores[1]*100))
