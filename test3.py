@@ -3,6 +3,10 @@ from keras.datasets import mnist
 import matplotlib.pyplot as plt
 from keras.datasets import fashion_mnist
 import numpy as np
+from keras import models
+from keras import layers
+from keras import regularizers
+
 # load (downloaded if needed) the MNIST dataset
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 # plot 4 images as gray scale
@@ -52,8 +56,16 @@ def baseline_model():
     model = Sequential()
     model.add(Dense(num_pixels, input_dim=num_pixels, kernel_initializer='normal', activation='relu'))
     model.add(Dense(num_classes, kernel_initializer='normal', activation='softmax'))
+    
+    model.add(layers.Dense(512, activation='relu', input_shape=(28 * 28,)))
+    model.add(layers.Dropout(0.5))
+    model.add(layers.Dense(10, activation='softmax'))
+    
+    model.add(layers.Dense(512, kernel_regularizer=regularizers.l2(0.001), activation='relu', input_shape=(28 * 28,)))
+    model.add(layers.Dense(10, activation='softmax'))
 # Compile model
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
     return model
 
 
