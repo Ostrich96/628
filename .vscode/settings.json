@@ -8,5 +8,6 @@
     ],
     "python.testing.pytestEnabled": false,
     "python.testing.unittestEnabled": true,
-    "jupyter.jupyterServerType": "remote"
+    "jupyter.jupyterServerType": "local",
+    "git.ignoreLimitWarning": true
 }
